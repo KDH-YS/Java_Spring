@@ -3,6 +3,15 @@
 <title>W3.CSS</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<script>
+    // 페이지가 로드될 때 오류 메시지가 있을 경우 alert을 표시합니다.
+    window.onload = function() {
+        const errorMessage = '[[${errorMessage}]]';
+        if (errorMessage) {
+            alert(errorMessage);
+        }
+    };
+</script>
 <body>
 
 <div class="w3-container">
@@ -18,12 +27,12 @@
         <img src="https://www.w3schools.com/w3css/img_avatar4.png" alt="Avatar" style="width:30%" class="w3-circle w3-margin-top">
       </div>
 
-      <form class="w3-container" action="/action_page.php">
+      <form class="w3-container" action="/logincheck" method="post">
         <div class="w3-section">
           <label><b>Username</b></label>
-          <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter Username" name="usrname" required>
+          <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter Username" name="userid" required>
           <label><b>Password</b></label>
-          <input class="w3-input w3-border" type="text" placeholder="Enter Password" name="psw" required>
+          <input class="w3-input w3-border" type="password" placeholder="Enter Password" name="userpswd" required>
           <button class="w3-button w3-block w3-green w3-section w3-padding" type="submit">Login</button>
           <input class="w3-check w3-margin-top" type="checkbox" checked="checked"> Remember me
         </div>
@@ -39,4 +48,5 @@
 </div>
             
 </body>
+
 </html>
