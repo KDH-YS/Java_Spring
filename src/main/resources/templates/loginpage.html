@@ -75,7 +75,6 @@
     </div>
 
 </div>
-
 <script>
 $(function() {
     $("#signupBtn").on("click", function() {
@@ -83,6 +82,7 @@ $(function() {
             username: $("#signupUserId").val(),
             pswd: $("#signupUserPswd").val(),
         };
+        
         fetch("/signup", {
             method: "POST",
             headers: {
@@ -93,15 +93,17 @@ $(function() {
         })
         .then(response => {
             if (!response.ok) {
-                throw new Error("서버 응답이 올바르지 않습니다");
+                throw new Error("서버 응답이 올바르지 않습니다.");
             }
             return response.json();
         })
         .then(data => {
             alert(data.message);
-            document.getElementById('signupModal').style.display = 'none';
-            $("#signupUserId").val('');
-            $("#signupUserPswd").val('');
+            if (data.message === "회원가입 성공! 로그인 해주세요.") {
+                document.getElementById('signupModal').style.display = 'none';
+                $("#signupUserId").val('');
+                $("#signupUserPswd").val('');
+            }
         })
         .catch(error => {
             console.error("오류 발생:", error);
@@ -110,6 +112,7 @@ $(function() {
     });
 });
 </script>
+
 
 </body>
 </html>
