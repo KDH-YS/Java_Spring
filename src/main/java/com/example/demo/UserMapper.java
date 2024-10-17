@@ -5,7 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface UserMapper {
 
-	User getuserid(String userid);
-
+	User getusername(String username);
+	void signup(User user);
 	
 }
