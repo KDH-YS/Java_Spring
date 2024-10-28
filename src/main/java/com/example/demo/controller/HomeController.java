@@ -2,16 +2,22 @@ package com.example.demo.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
 
 @Controller
 public class HomeController {
 
 	
-	@GetMapping({"/","/home"})
+	@GetMapping({"/","/index"})
 	public String Home() {
-		return "home";
+		return "index";
+	}
+	@GetMapping("/login")
+	public String Login() {
+		return"login";
+	}
+	@GetMapping("/signup")
+	public String Signup() {
+		return "signup";
 	}
 	
 	
