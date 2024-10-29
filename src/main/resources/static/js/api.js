@@ -17,10 +17,12 @@ function displaySearchResults(results) {
     
     results.forEach(item => {
         const itemDiv = document.createElement("div");
+        const cleanTitle = item.title.replace(/<[^>]*>/g, ''); // HTML 태그 제거
         itemDiv.innerHTML = `
-            <p>${escapeHTML(item.title)}</p>
+            <p>${escapeHTML(cleanTitle)}</p>
+			<img src="${escapeHTML(item.image)}" alt="${escapeHTML(cleanTitle)}" style="max-width: 100px; max-height: 100px;">
             <a href="${escapeHTML(item.link)}" target="_blank">링크</a>
-            <button onclick="addFavorite('${item.productId}', '${escapeHTML(item.title)}', '${escapeHTML(item.link)}', '${escapeHTML(item.category1)}')">즐겨찾기 추가</button>
+            <button onclick="addFavorite('${item.productId}', '${escapeHTML(cleanTitle)}', '${escapeHTML(item.link)}', '${escapeHTML(item.category1)}')">즐겨찾기 추가</button>
         `;
         searchResults.appendChild(itemDiv);
     });
@@ -51,7 +53,6 @@ async function addFavorite(productId, title, link, category1) {
     }
 }
 
-
 async function loadFavorites() {
     try {
         const response = await fetch('/api/favorites/list?userId=1');
@@ -63,8 +64,9 @@ async function loadFavorites() {
 
         favorites.forEach(fav => {
             const favDiv = document.createElement("div");
+            const cleanTitle = fav.title.replace(/<[^>]*>/g, ''); // HTML 태그 제거
             favDiv.innerHTML = `
-                <p>${escapeHTML(fav.title)} - <a href="${escapeHTML(fav.link)}" target="_blank">링크</a></p>
+                <p>${escapeHTML(cleanTitle)} - <a href="${escapeHTML(fav.link)}" target="_blank">링크</a></p>
             `;
             favoriteList.appendChild(favDiv);
         });
