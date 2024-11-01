@@ -1,7 +1,7 @@
 async function search() {
     const query = document.getElementById("searchQuery").value;
     try {
-        const response = await fetch(`/api/search?query=${encodeURIComponent(query)}`);
+        const response = await fetch(`/favorite/search?query=${encodeURIComponent(query)}`);
         if (!response.ok) throw new Error('검색에 실패했습니다.');
         const results = await response.json();
         displaySearchResults(results);
@@ -39,7 +39,7 @@ async function addFavorite(productId, title, link, category1) {
     };
 
     try {
-        const response = await fetch('/api/favorites/add', {
+        const response = await fetch('/favorite/add', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(favorite)
@@ -55,7 +55,7 @@ async function addFavorite(productId, title, link, category1) {
 
 async function loadFavorites() {
     try {
-        const response = await fetch('/api/favorites/list?userId=1');
+        const response = await fetch('/favorite/list?userId=1');
         if (!response.ok) throw new Error('즐겨찾기 목록을 불러오는 데 실패했습니다.');
         const favorites = await response.json();
 

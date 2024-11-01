@@ -11,6 +11,7 @@ header {
     padding: 20px 0;
     text-align: center;
     color: white;
+    position: relative; /* 로그인 버튼을 절대 위치시키기 위한 부모 요소 설정 */
 }
 
 h1 {
@@ -82,4 +83,26 @@ a {
 
 a:hover {
     text-decoration: underline; /* 링크 hover 효과 */
+}
+
+/* 오른쪽 상단 로그인 버튼 스타일 */
+.login-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.login-container button {
+    padding: 8px 16px;
+    background-color: #1da85a;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.login-container button:hover {
+    background-color: #159e4b;
 }

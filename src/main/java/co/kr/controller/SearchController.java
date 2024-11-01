@@ -19,7 +19,7 @@ public class SearchController {
     @Value("${naver.api.clientSecret}")
     private String clientSecret;
 
-    @GetMapping("/api/search")
+    @GetMapping("/favorite/search")
     public ResponseEntity<List<Map<String, Object>>> search(@RequestParam("query") String query) {
         try {
             List<Map<String, Object>> items = callNaverApi(query);

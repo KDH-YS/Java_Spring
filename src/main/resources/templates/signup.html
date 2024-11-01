@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.springframework.org/security/tags">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입 페이지</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        input[type="text"],
+        input[type="password"] {
+            padding: 10px;
+            width: 200px;
+            margin: 10px 0;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 10px;
+            cursor: pointer;
+        }
+        .link {
+            display: block;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>회원가입</h1>
+        <form th:action="@{/signup}" method="post">
+            <input type="text" name="username" placeholder="아이디" required><br>
+            <input type="password" name="password" placeholder="비밀번호" required><br>
+            <input type="password" name="confirm_password" placeholder="비밀번호 확인" required><br>
+            <button type="submit">회원가입</button>
+        </form>
+        <a th:href="@{/login}" class="link">로그인</a>
+        <a th:href="@{/}" class="link">메인으로 돌아가기</a>
+    </div>
+</body>
+</html>

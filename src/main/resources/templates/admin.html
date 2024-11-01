@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.springframework.org/security/tags">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>관리자 페이지</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 10px;
+            cursor: pointer;
+        }
+        .button-group {
+            display: flex; /* 가로로 나열하기 위한 설정 */
+            justify-content: center; /* 버튼들을 가운데 정렬 */
+        }
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            margin: 20px auto;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>관리자 페이지</h1>
+        
+        <!-- 사용자 목록 테이블 -->
+        <table>
+            <thead>
+                <tr>
+                    <th>사용자 ID</th>
+                    <th>사용자명</th>
+                    <th>권한</th>
+                    <th>상태</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 사용자 정보를 동적으로 표시하기 위한 반복문 -->
+                <tr th:each="user : ${users}">
+                    <td th:text="${user.id}"></td>
+                    <td th:text="${user.username}"></td>
+                    <td th:each="role: ${user.roles}" th:text="${role.role + ' '}"></td>
+                    
+                </tr>
+                <!-- 추가 사용자 정보는 여기에 반복하여 표시 -->
+            </tbody>	
+        </table>
+        
+        <!-- 버튼 그룹 -->
+        <div class="button-group">
+            <!-- 홈으로 돌아가기 버튼 -->
+            <form th:action="@{/}" method="get">
+                <button type="submit">홈으로 돌아가기</button>
+            </form>
+            <!-- 로그아웃 버튼 -->
+            <form th:action="@{/logout}" method="post" sec:authorize="isAuthenticated()">
+                <button type="submit">로그아웃</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

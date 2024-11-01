@@ -1,5 +1,6 @@
 package co.kr.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import co.kr.entity.Favorite;
@@ -20,7 +21,16 @@ public class FavoriteService {
         }
     }
 
+
     public List<Favorite> getFavorites(int userId) {
-        return favoriteMapper.getFavoritesByUserId(userId);
+        try {
+            List<Favorite> favorites = favoriteMapper.getFavoritesByUserId(userId);
+            return favorites != null ? favorites : new ArrayList<>();
+        } catch (Exception e) {
+            // 로그를 남기거나 예외 메시지를 출력할 수 있습니다.
+            System.err.println("Error fetching favorites: " + e.getMessage());
+            return new ArrayList<>();
+        }
     }
+
 }

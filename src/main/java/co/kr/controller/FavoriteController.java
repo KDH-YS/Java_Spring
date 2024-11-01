@@ -9,13 +9,15 @@ import org.springframework.web.bind.annotation.*;
 import co.kr.entity.Favorite;
 import co.kr.service.FavoriteService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+@Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/favorites")
+@RequestMapping("/favorite")
 public class FavoriteController {
     private final FavoriteService favoriteService;
     private static final Logger logger = LoggerFactory.getLogger(FavoriteController.class);
@@ -30,7 +32,7 @@ public class FavoriteController {
             favoriteService.addFavorite(favorite);
             return ResponseEntity.ok(Collections.singletonMap("message", "즐겨찾기가 성공적으로 추가되었습니다."));
         } catch (Exception e) {
-            logger.error("Error adding favorite: ", e);
+            log.info("Error adding favorite: ", e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(Collections.singletonMap("message", "즐겨찾기 추가 중 오류가 발생했습니다."));
         }

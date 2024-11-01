@@ -24,4 +24,45 @@
         WHERE userId = #{userId} AND productId = #{productId} AND category1 = #{category1}
     </select>
 
+
+
+    <select id="findUser" resultMap="UserWithRoles">
+        SELECT u.id, u.username, u.password, r.id AS role_id, r.role 
+        FROM users u 
+        LEFT JOIN user_roles ur ON u.id = ur.user_id 
+        LEFT JOIN roles r ON ur.role_id = r.id 
+        WHERE u.username = #{username}
+    </select>
+
+	<insert id="signup" parameterType="co.kr.entity.User">
+		INSERT INTO users(username,PASSWORD)VALUES(#{username},#{password});
+	</insert>
+	
+	<insert id="newrole" parameterType="co.kr.entity.Role">
+		INSERT INTO roles(id,ROLE)VALUES(LAST_INSERT_ID(),"ROLE_USER");
+	</insert>
+	<insert id="UserRoleMapping">
+		INSERT INTO user_roles(user_id,role_id)VALUES(LAST_INSERT_ID(),LAST_INSERT_ID());
+	</insert>
+    <select id="findAll" resultMap="UserWithRoles">
+        SELECT u.id ,
+               u.username,
+               u.password,
+               r.id as role_id,
+               r.role                             
+        FROM users u
+                 LEFT JOIN user_roles ur ON u.id = ur.user_id
+                 LEFT JOIN roles r ON ur.role_id = r.id
+    </select>
+
+
+    <resultMap id="UserWithRoles" type="co.kr.entity.User">
+        <id property="id" column="id"/>
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+	<collection property="roles" ofType="co.kr.entity.Role">
+        <id property="id" column="role_id"/>
+        <result property="role" column="role"/>
+    </collection>
+    </resultMap>
 </mapper>

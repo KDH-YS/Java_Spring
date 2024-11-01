@@ -13,6 +13,14 @@
             <input type="text" id="searchQuery" placeholder="검색어 입력">
             <button onclick="search()">검색</button>
         </div>
+        <div class="login-container" sec:authorize="!isAuthenticated()">
+            <button  onclick="window.location.href='/login'">로그인</button>
+        </div>
+		<div class="login-container" sec:authorize="isAuthenticated()">
+			<form th:action="@{/logout}" method="post" sec:authorize="isAuthenticated()">
+            	<button type="submit">로그아웃</button>
+        	</form>
+        </div>
     </header>
     
     <main>

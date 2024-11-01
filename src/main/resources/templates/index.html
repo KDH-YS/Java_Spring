@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.springframework.org/security/tags">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>메인 페이지</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 10px;
+            cursor: pointer;
+        }
+        .button-group {
+            display: flex; /* 가로로 나열하기 위한 설정 */
+            justify-content: center; /* 버튼들을 가운데 정렬 */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>환영합니다! <span sec:authorize="isAuthenticated()" sec:authentication="name"></span></h1>
+        <p sec:authorize="!isAuthenticated()">아래 버튼을 통해 로그인 또는 회원가입 페이지로 이동하세요.</p>
+        
+        <!-- 로그인 및 회원가입 버튼 그룹 -->
+        <div class="button-group">
+			<!-- 상품검색 버튼 -->
+			 <form th:action="@{/favorite}" method="post">
+                <button type="submit">상품검색</button>
+            </form>
+            <!-- 로그인 버튼 -->
+            <form th:action="@{/login}" method="post" sec:authorize="!isAuthenticated()">
+                <button type="submit">로그인</button>
+            </form>            
+            <!-- 회원가입 버튼 -->
+            <form th:action="@{/signup}" sec:authorize="!isAuthenticated()">
+                <button type="submit">회원가입</button>
+            </form>
+        </div>
+        <form th:action="@{/admin}" method="get" sec:authorize="hasRole('ADMIN')">
+            <button type="submit">관리자 페이지</button>
+        </form>
+        <!-- 로그아웃 버튼 -->
+        <form th:action="@{/logout}" method="post" sec:authorize="isAuthenticated()">
+            <button type="submit">로그아웃</button>
+        </form>
+    </div>
+</body>
+</html>
+
