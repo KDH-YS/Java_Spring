@@ -17,15 +17,15 @@ public class HomeController {
 
 	private final FavoriteMapper favoriteMapper;	
 	@GetMapping({"/","/index"})
-	public String Home() {
+	public String home() {
 		return "index";
 	}
 	@PostMapping("/favorite")
-	public String home() {
+	public String favorite() {
 		return "favorite";
 	}
 	@GetMapping("/login")
-	public String Login() {
+	public String login() {
 		return"login";
 	}
 	@GetMapping("/signup")
